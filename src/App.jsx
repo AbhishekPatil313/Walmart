@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import { MdContactPage } from "react-icons/md";
-import { FaBarsProgress } from "react-icons/fa6";
-import { FaAngleRight } from "react-icons/fa";
-import { FaExternalLinkAlt } from "react-icons/fa";
+// import { MdContactPage } from "react-icons/md";
+// import { FaBarsProgress } from "react-icons/fa6";
+// import { FaAngleRight } from "react-icons/fa";
+// import { FaExternalLinkAlt } from "react-icons/fa";
 
 import CalendarInput from './components/CalenderInput';
 const App = () => {
@@ -36,9 +36,9 @@ const App = () => {
             {Array.from({ length: 20 }, (_, i) => (
               <li key={i}>
                 <div className='news-section'>
-                <MdContactPage /> 
+                {/* <MdContactPage />  */}
                 <span>MT Newswire </span>
-                <FaBarsProgress />
+                {/* <FaBarsProgress /> */}
                 <span>18 Dec 24</span>
                 </div>
                 <div>
@@ -76,11 +76,11 @@ const App = () => {
               <span className='positives'>Positives</span>
               <hr></hr>
               <br></br>
-              <FaAngleRight />
+              {/* <FaAngleRight /> */}
               Lorem ipsum dolor sapiente numquam reiciendis commodi repellat.
               <p className='grid-item-date'>19 Nov 24 'Walmart Inc, Q3 2025 , Nov 19 ,2024'</p>
 
-                <FaAngleRight />
+                {/* <FaAngleRight /> */}
                 Lorem ipsum dolor sapiente numquam reiciendis commodi repellat.
                 <p className='grid-item-date'>19 Nov 24 'Walmart Inc, Q3 2025 , Nov 19 ,2024'</p>
 
@@ -92,7 +92,7 @@ const App = () => {
           ))}
         </div>
         <div className='last-box'>
-        <FaAngleRight />
+        {/* <FaAngleRight /> */}
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit, natus alias ipsam neque tenetur assumenda?
           <p className='grid-item-date'>19 Nov 24 'Walmart Inc, Q3 2025 , Nov 19 ,2024'</p>
 
@@ -142,33 +142,39 @@ const App = () => {
            <p>Finalcials & Estimates</p>
               <div className='keyvalue'>
                 <span className='key'>key</span>
-                <span className='value'><FaExternalLinkAlt />
+                <span className='value'>
+                  {/* <FaExternalLinkAlt /> */}
                 </span>
               </div>
               <div className='keyvalue'>
                 <span className='key'>key</span>
-                <span className='value'><FaExternalLinkAlt />
+                <span className='value'>
+                  {/* <FaExternalLinkAlt /> */}
                 </span>
               </div>
               <div className='keyvalue'>
                 <span className='key'>key</span>
-                <span className='value'><FaExternalLinkAlt />
+                <span className='value'>
+                  {/* <FaExternalLinkAlt /> */}
                 </span>
               </div>
             <p>Peers</p>
             <div className='keyvalue'>
                 <span className='key'>key</span>
-                <span className='value'><FaExternalLinkAlt />
+                <span className='value'>
+                  {/* <FaExternalLinkAlt /> */}
                 </span>
               </div>
               <div className='keyvalue'>
                 <span className='key'>key</span>
-                <span className='value'><FaExternalLinkAlt />
+                <span className='value'>
+                  {/* <FaExternalLinkAlt /> */}
                 </span>
               </div>
               <div className='keyvalue'>
                 <span className='key'>key</span>
-                <span className='value'><FaExternalLinkAlt />
+                <span className='value'>
+                  {/* <FaExternalLinkAlt /> */}
                 </span>
               </div>
 

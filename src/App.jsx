@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import fetchData from './components/fetchData';
 // import { MdContactPage } from "react-icons/md";
 // import { FaBarsProgress } from "react-icons/fa6";
-import { FaAngleRight } from "react-icons/fa";
+// import { FaAngleRight } from "react-icons/fa";
 import { use } from 'react';
 // import { FaExternalLinkAlt } from "react-icons/fa";
 
@@ -12,8 +12,9 @@ import { use } from 'react';
 const App = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [final_data , setFinalData]=useState([]);
   const [Id,setId] =useState(null);
-
+  const [trig , setTrig] = useState(false);
   useEffect(() => {
     const getData = async () => {
       const records = await fetchData();
@@ -25,17 +26,45 @@ const App = () => {
   }, []); // Runs once when the component is mounted
 
   if (loading) return <p>Loading...</p>;
-  if(loading)console.log(data);
+  // if(loading)console.log(data);
   
 
 const handleChange = (event) => {
+  setTrig(false);
   if(event.target.value === '1')setId(123);
   if(event.target.value==='2')setId(124);
   
 };
-  const filtered_document = data.filter((doc) => doc.account_id === Id);
-  console.log(filtered_document);
+const filtered_document = data.filter((doc) => doc.account_id === Id);
+  console.log(data);
 
+  const handleChange2 = (event)=>{
+    setTrig(true);
+
+    if(event.target.value === '1'){
+      let final_data=data.filter((doc) => doc.quarter === 1 && doc.account_id === Id);
+      setFinalData(final_data);
+    }
+    else if(event.target.value === '2'){
+      let final_data=data.filter((doc) => doc.quarter === 2 && doc.account_id === Id);
+      setFinalData(final_data);
+      // console.log(filtered_document);
+      // final_data.map((doc, index) => (
+      //   console.log(doc)
+      // ))
+       console.log("this is final data : ",final_data)
+
+    }
+    else if(event.target.value === '3'){
+      let final_data=data.filter((doc) => doc.quarter === 3 && doc.account_id === Id);
+      setFinalData(final_data);
+    }
+    else if(event.target.value === '4'){
+     let  final_data=data.filter((doc) => doc.quarter === 4 && doc.account_id === Id);
+     setFinalData(final_data);
+    }
+  
+  }
   return (
     <div className="app-container">
       <nav className="navbar">
@@ -91,7 +120,12 @@ const handleChange = (event) => {
               <p>Expert Calls</p>
             </div>
           <div className='section-2-subtabs'>
-            <p>Calender Input</p>
+          <select className='dropdown' onChange={handleChange2}>
+         <option value="1">Quarter 1</option>
+          <option value="2">Quarter 2</option>
+          <option value="3">Quarter 3</option>
+          <option value="4">Quarter 4</option>
+          </select>
             <p>View Industry Summaries</p>
           </div>
           
@@ -105,7 +139,8 @@ const handleChange = (event) => {
               <hr></hr>
               <br></br>
              
-              {filtered_document.map((doc, index) => (
+    {trig ? <>
+      {final_data.map((doc, index) => (
                 <>
                 <>{doc.positives.map((sentence)=>(
                   <>
@@ -115,6 +150,21 @@ const handleChange = (event) => {
                 ))}</>
                 </>
               ))}
+    
+    </> : <>
+    
+      {filtered_document.map((doc, index) => (
+                <>
+                <>{doc.positives.map((sentence)=>(
+                  <>
+                  
+                  <p> {sentence}</p>
+                  </>
+                ))}</>
+                </>
+              ))}
+    
+    </>}    
               <p className='grid-item-date'>19 Nov 24 'Walmart Inc, Q3 2025 , Nov 19 ,2024'</p>   
             </div>
             <div  className="grid-item">
@@ -122,16 +172,32 @@ const handleChange = (event) => {
               <hr></hr>
               <br></br>
            
-              {filtered_document.map((doc, index) => (
+              {trig ? <>
+      {final_data.map((doc, index) => (
                 <>
                 <>{doc.negative.map((sentence)=>(
                   <>
-                 
+                  
                   <p> {sentence}</p>
                   </>
                 ))}</>
                 </>
               ))}
+    
+    </> : <>
+    
+      {filtered_document.map((doc, index) => (
+                <>
+                <>{doc.negative.map((sentence)=>(
+                  <>
+                  
+                  <p> {sentence}</p>
+                  </>
+                ))}</>
+                </>
+              ))}
+    
+    </>}   
               <p className='grid-item-date'>19 Nov 24 'Walmart Inc, Q3 2025 , Nov 19 ,2024'</p>   
             </div>
             <div  className="grid-item">
@@ -139,15 +205,32 @@ const handleChange = (event) => {
               <hr></hr>
               <br></br>
               {/* <FaAngleRight /> */}
-              {filtered_document.map((doc, index) => (
+              {trig ? <>
+      {final_data.map((doc, index) => (
                 <>
                 <>{doc.overall.map((sentence)=>(
                   <>
+                  
                   <p> {sentence}</p>
                   </>
                 ))}</>
                 </>
               ))}
+    
+    </> : <>
+    
+      {filtered_document.map((doc, index) => (
+                <>
+                <>{doc.overall.map((sentence)=>(
+                  <>
+                  
+                  <p> {sentence}</p>
+                  </>
+                ))}</>
+                </>
+              ))}
+    
+    </>}   
               <p className='grid-item-date'>19 Nov 24 'Walmart Inc, Q3 2025 , Nov 19 ,2024'</p>   
             </div>
             <div  className="grid-item">
@@ -155,7 +238,7 @@ const handleChange = (event) => {
               <hr></hr>
               <br></br>
               {/* <FaAngleRight /> */}
-              {filtered_document.map((doc, index) => (
+              {final_data.map((doc, index) => (
                 <>
                 <>{doc.overall.map((sentence)=>(
                   <>

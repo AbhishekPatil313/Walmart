@@ -1,12 +1,41 @@
 import React from 'react';
 import './App.css';
+import { useEffect, useState } from 'react';
+import fetchData from './components/fetchData';
 // import { MdContactPage } from "react-icons/md";
 // import { FaBarsProgress } from "react-icons/fa6";
-// import { FaAngleRight } from "react-icons/fa";
+import { FaAngleRight } from "react-icons/fa";
+import { use } from 'react';
 // import { FaExternalLinkAlt } from "react-icons/fa";
 
 // import CalendarInput from './components/CalenderInput';
 const App = () => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [Id,setId] =useState(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      const records = await fetchData();
+      setData(records);
+      setLoading(false);
+    };
+
+    getData();
+  }, []); // Runs once when the component is mounted
+
+  if (loading) return <p>Loading...</p>;
+  if(loading)console.log(data);
+  
+
+const handleChange = (event) => {
+  if(event.target.value === '1')setId(123);
+  if(event.target.value==='2')setId(124);
+  
+};
+  const filtered_document = data.filter((doc) => doc.account_id === Id);
+  console.log(filtered_document);
+
   return (
     <div className="app-container">
       <nav className="navbar">
@@ -15,11 +44,10 @@ const App = () => {
         <button className="search-button">Search</button>
         <button className="clear-button">Clear All</button>
         <button className="save-button">Save Search</button>
-        <select className="dropdown">
-          <option>My Searches & Alerts</option>
-          <option>Search 1</option>
-          <option>Search 2</option>
-        </select>
+        <select className='dropdown' onChange={handleChange}>
+        <option value="1">walmart</option>
+        <option value="2">amazon</option>
+      </select>
       </nav>
       <div className="main-content">
         {/* First Section */}
@@ -71,25 +99,74 @@ const App = () => {
           </div>
 
         <div className=" grid-container">
-          {Array.from({ length: 4 }, (_, i) => (
-            <div key={i} className="grid-item">
+          
+            <div  className="grid-item">
+              <span className='positives'>Positives</span>
+              <hr></hr>
+              <br></br>
+             
+              {filtered_document.map((doc, index) => (
+                <>
+                <>{doc.positives.map((sentence)=>(
+                  <>
+                  
+                  <p> {sentence}</p>
+                  </>
+                ))}</>
+                </>
+              ))}
+              <p className='grid-item-date'>19 Nov 24 'Walmart Inc, Q3 2025 , Nov 19 ,2024'</p>   
+            </div>
+            <div  className="grid-item">
+              <span className='positives'>Negatives</span>
+              <hr></hr>
+              <br></br>
+           
+              {filtered_document.map((doc, index) => (
+                <>
+                <>{doc.negative.map((sentence)=>(
+                  <>
+                 
+                  <p> {sentence}</p>
+                  </>
+                ))}</>
+                </>
+              ))}
+              <p className='grid-item-date'>19 Nov 24 'Walmart Inc, Q3 2025 , Nov 19 ,2024'</p>   
+            </div>
+            <div  className="grid-item">
+              <span className='positives'>Overall</span>
+              <hr></hr>
+              <br></br>
+              {/* <FaAngleRight /> */}
+              {filtered_document.map((doc, index) => (
+                <>
+                <>{doc.overall.map((sentence)=>(
+                  <>
+                  <p> {sentence}</p>
+                  </>
+                ))}</>
+                </>
+              ))}
+              <p className='grid-item-date'>19 Nov 24 'Walmart Inc, Q3 2025 , Nov 19 ,2024'</p>   
+            </div>
+            <div  className="grid-item">
               <span className='positives'>Positives</span>
               <hr></hr>
               <br></br>
               {/* <FaAngleRight /> */}
-              Lorem ipsum dolor sapiente numquam reiciendis commodi repellat.
-              <p className='grid-item-date'>19 Nov 24 'Walmart Inc, Q3 2025 , Nov 19 ,2024'</p>
-
-                {/* <FaAngleRight /> */}
-                Lorem ipsum dolor sapiente numquam reiciendis commodi repellat.
-                <p className='grid-item-date'>19 Nov 24 'Walmart Inc, Q3 2025 , Nov 19 ,2024'</p>
-
-               
-
-                
+              {filtered_document.map((doc, index) => (
+                <>
+                <>{doc.overall.map((sentence)=>(
+                  <>
+                  <p> {sentence}</p>
+                  </>
+                ))}</>
+                </>
+              ))}
+              <p className='grid-item-date'>19 Nov 24 'Walmart Inc, Q3 2025 , Nov 19 ,2024'</p>   
             </div>
-            
-          ))}
+         
         </div>
         <div className='last-box'>
         {/* <FaAngleRight /> */}
@@ -185,3 +262,20 @@ const App = () => {
   );
 };
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

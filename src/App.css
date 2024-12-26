@@ -35,7 +35,7 @@
 .navbar .search-button{
 background-color: rgb(33, 149, 244);
 color: white;
-margin-right: 35rem;
+margin-right: 30rem;
 }
 .navbar .clear-button,
 .navbar .save-button {
@@ -141,6 +141,7 @@ margin-right: 35rem;
   height: 100px;
   width: 300px;
   border-radius: 8px;
+  overflow: auto;
 }
 .grid-item-date{
   color: #777;
